@@ -1,7 +1,7 @@
 <section class="dialog">
   <section class="dialog_container">
     <header>
-      <h2 class="dialog_title">{{ title }}</h2>
+      <ng-content select="[header]"></ng-content>
     </header>
     <main>
       <ng-content></ng-content>

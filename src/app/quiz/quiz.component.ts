@@ -35,4 +35,8 @@ export class QuizComponent implements OnInit {
     this.router.navigate(['/result']);
     return;
   }
+
+  closeDialog() {
+    this.showDialog = false;
+  }
 }

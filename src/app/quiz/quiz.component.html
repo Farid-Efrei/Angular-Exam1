@@ -11,6 +11,10 @@
     <button (click)="goToResultPage()" class="btn">Show score</button>
   </div>
   <app-dialog *ngIf="showDialog" title="Confirmation" (hasConfirmed)="dialogClosed($event)">
+    <h2 class="dialog_title" header>
+      <span class="dialog_title_text">Confirmation</span>
+      <span class="dialog_title_close" (click)="closeDialog()">&times;</span>
+    </h2>
     <p>Êtes-vous sûr de vouloir valider vos réponses ?</p>
   </app-dialog>
 </section>

@@ -19,3 +19,14 @@
     @apply flex justify-center;
   }
 }
+
+.dialog_title {
+  @apply flex justify-between items-center w-full;
+
+  &_text {
+    @apply text-xl font-bold text-violet-500;
+  }
+  &_close {
+    @apply p-1 rounded-full hover:bg-gray-200 text-black text-2xl w-10 h-10 flex items-center justify-center;
+  }
+}
