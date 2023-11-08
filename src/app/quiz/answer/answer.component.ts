@@ -14,17 +14,14 @@ import { QuizService } from "../../shared/services/quiz.service";
 export class AnswerComponent {
   @Input() answers: any[] = [];
   @Input() questionId: number = 0;
-  @Output() answerSelected = new EventEmitter();
+  @Output() answerSelected = new EventEmitter<boolean>();
   isQuizFinished = this.quizService.isQuizFinished;
 
   constructor(private quizService: QuizService) { }
 
-  getAnswerLetter(j: number) {
-    return String.fromCharCode(65 + j);
-  }
-
-  addAnswer(answer: string) {
-    this.answerSelected.emit(answer);
+  addAnswer(answer: string, questionId: number) {
+    this.quizService.addAnswer(answer, questionId);
+    this.answerSelected.emit(true);
   }
 
   isAnswerSelected(answer: string, id: number) {

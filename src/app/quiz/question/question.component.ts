@@ -9,6 +9,8 @@ import { QuizService } from "../../shared/services/quiz.service";
 })
 export class QuestionComponent implements OnInit {
   quizContent: any[] = this.quizService.quizContent;
+  answeredDate: Map<number, Date> = new Map();
+  currentDate = new Date();
 
   constructor(private quizService: QuizService) { }
 
@@ -16,7 +18,11 @@ export class QuestionComponent implements OnInit {
     this.quizService.getQuizContent();
   }
 
-  addAnswer(answer: string, questionId: number) {
-    this.quizService.addAnswer(answer, questionId);
+  onAnswerSelected(questionId: number) {
+    this.answeredDate.set(questionId, new Date());
+  }
+
+  getQuestionDate(questionId: number) {
+    return this.answeredDate.get(questionId) || null;
   }
 }

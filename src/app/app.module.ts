@@ -14,6 +14,8 @@ import { AnswerComponent } from './quiz/answer/answer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
+import { AddPrefixDirective } from './shared/directives/add-prefix.directive';
+import { DateToSecondsPipe } from './shared/pipes/date-to-seconds.pipe';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { LoginComponent } from './auth/login/login.component';
     QuestionComponent,
     AnswerComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    AddPrefixDirective,
+    DateToSecondsPipe
   ],
   imports: [
     BrowserModule,

@@ -3,6 +3,7 @@
   <app-answer
     [answers]="content?.answers"
     [questionId]="content?.id"
-    (answerSelected)="addAnswer($event, content.id)"
+    (answerSelected)="onAnswerSelected(content.id)"
   ></app-answer>
+  <p *ngIf="!!getQuestionDate(content.id)" class="my-2">Répondu en {{ getQuestionDate(content.id) | dateToSeconds:currentDate }}</p>
 </section>

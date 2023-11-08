@@ -23,7 +23,7 @@ export class RegisterComponent implements OnInit {
       username: new FormControl('', Validators.required),
       password: new FormControl('', [Validators.required, Validators.minLength(4)]),
       confirmPassword: new FormControl('', Validators.required),
-    }, { validators: [this.checkPasswords, this.checkUsernamePassword] });
+    }, { validators: this.checkPasswords });
   }
 
   addUser() {
@@ -35,9 +35,9 @@ export class RegisterComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  private checkPasswords(formGroup: FormGroup) {
-    const password = formGroup.get('password');
-    const confirmPassword = formGroup.get('confirmPassword');
+  private checkPasswords(control: FormGroup) {
+    const password = control.get('password');
+    const confirmPassword = control.get('confirmPassword');
     return password?.value !== confirmPassword?.value ? { missMatch: true } : null;
   }
 
@@ -57,7 +57,6 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.errors?.['required']) return 'Les champs sont obligatoires';
     if (!!this.registerForm.controls?.['password']?.errors?.['minlength']) return `La longueur minimal pour votre mot de passe est ${this.registerForm.controls?.['password']?.errors?.['minlength']?.requiredLength}`;
     if (this.registerForm.errors?.['missMatch']) return 'Les mots de passe ne correspondent pas';
-    if (this.registerForm.errors?.['usernamePassword']) return 'Le mot de passe comporte des informations personnelles';
     return 'Un problème est survenu';
   }
 }
