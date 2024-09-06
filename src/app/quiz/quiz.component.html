@@ -10,4 +10,7 @@
   <div class="quiz_validation">
     <button (click)="goToResultPage()" class="btn">Show score</button>
   </div>
+  <app-dialog *ngIf="showDialog" title="Confirmation" (hasConfirmed)="dialogClosed($event)">
+    <p>Êtes-vous sûr de vouloir valider vos réponses ?</p>
+  </app-dialog>
 </section>

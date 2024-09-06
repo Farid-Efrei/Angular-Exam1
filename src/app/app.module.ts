@@ -17,6 +17,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { AddPrefixDirective } from './shared/directives/add-prefix.directive';
 import { HighlightDirective } from './shared/directives/highlight.directive';
 import { DateToSecondsPipe } from './shared/pipes/date-to-seconds.pipe';
+import { DialogComponent } from './shared/components/dialog/dialog.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { DateToSecondsPipe } from './shared/pipes/date-to-seconds.pipe';
     RegisterComponent,
     AddPrefixDirective,
     HighlightDirective,
-    DateToSecondsPipe
+    DateToSecondsPipe,
+    DialogComponent
   ],
   imports: [
     BrowserModule,

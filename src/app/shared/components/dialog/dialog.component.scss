@@ -1,0 +1,20 @@
+.dialog {
+  @apply fixed top-0 left-0 w-full h-full bg-gray-900/50;
+
+  &_container {
+    @apply fixed top-[100px] left-1/2 -translate-x-1/2 z-50 overflow-y-auto w-2/3 max-h-[80vh] flex flex-col;
+    @apply bg-white shadow-2xl rounded-lg border-2 border-violet-400;
+  }
+  header {
+    @apply flex items-center justify-between p-4 border-b border-gray-200;
+  }
+  main {
+    @apply flex-1 p-4;
+  }
+  footer {
+    @apply flex items-center justify-end gap-8 p-4 border-t border-gray-200;
+  }
+  &_title {
+    @apply text-xl font-bold text-violet-500;
+  }
+}

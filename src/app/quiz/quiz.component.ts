@@ -11,6 +11,7 @@ import { QuizService } from "../shared/services/quiz.service";
 export class QuizComponent implements OnInit {
   isQuizFinished = this.quizService.isQuizFinished;
   playerName = '';
+  showDialog = false;
 
   constructor(
     private quizService: QuizService,
@@ -26,6 +27,12 @@ export class QuizComponent implements OnInit {
   }
 
   goToResultPage() {
+    this.showDialog = true;
+  }
+
+  dialogClosed(hasConfirmed: boolean) {
+    if (!hasConfirmed) return this.showDialog = false;
     this.router.navigate(['/result']);
+    return;
   }
 }

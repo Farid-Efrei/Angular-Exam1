@@ -1,0 +1,14 @@
+<section class="dialog">
+  <section class="dialog_container">
+    <header>
+      <h2 class="dialog_title">{{ title }}</h2>
+    </header>
+    <main>
+      <ng-content></ng-content>
+    </main>
+    <footer>
+      <button class="btn" (click)="closeDialog(true)">Valider</button>
+      <button class="btn--outline" (click)="closeDialog()">Annuler</button>
+    </footer>
+  </section>
+</section>
