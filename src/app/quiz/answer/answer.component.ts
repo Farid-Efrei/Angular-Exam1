@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-=======
-import { Component, Input } from '@angular/core';
->>>>>>> 1f367bf (Add answer component)
 import { QuizService } from "../../shared/services/quiz.service";
 
 @Component({

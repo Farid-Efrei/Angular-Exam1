@@ -15,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
 import { AddPrefixDirective } from './shared/directives/add-prefix.directive';
+import { HighlightDirective } from './shared/directives/highlight.directive';
 import { DateToSecondsPipe } from './shared/pipes/date-to-seconds.pipe';
 
 @NgModule({
@@ -30,6 +31,7 @@ import { DateToSecondsPipe } from './shared/pipes/date-to-seconds.pipe';
     LoginComponent,
     RegisterComponent,
     AddPrefixDirective,
+    HighlightDirective,
     DateToSecondsPipe
   ],
   imports: [
