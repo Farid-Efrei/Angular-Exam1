@@ -20,15 +20,13 @@ export class CategoriesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('CategoriesComponent chargé !');
     this.loadCategories();
   }
 
   loadCategories(): void {
-    console.log('Chargement des catégories...');
     this.categoryService.getCategories().subscribe({
       next: (data) => {
-        console.log('Catégories reçues:', data);
+        console.log(' Catégories reçues:', data);
         this.categories = data;
         this.filteredCategories = data;
         this.isLoading = false;
@@ -60,7 +58,14 @@ export class CategoriesComponent implements OnInit {
   }
 
   goToQuiz(categoryId: number): void {
-    console.log('Navigation vers quiz, catégorie:', categoryId);
+    console.log('🚀 Navigation vers quiz, ID:', categoryId);
+    console.log('🔢 Type:', typeof categoryId);
+
+    if (!categoryId || isNaN(categoryId)) {
+      console.error('❌ ID invalide:', categoryId);
+      return;
+    }
+
     this.router.navigate(['/quiz', categoryId]);
   }
 }
