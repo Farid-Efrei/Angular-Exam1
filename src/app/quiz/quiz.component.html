@@ -1,13 +1,37 @@
-<section>
-  <h2 class="quiz_title">C'est parti {{ playerName }}, soit prêt !</h2>
-  <section class="quiz_reset" *ngIf="isQuizFinished">
-    <h3>You can see your answers</h3>
-    <button class="btn--outline">Reset</button>
-  </section>
-  <section class="quiz_questions-list">
-    <app-question></app-question>
-  </section>
-  <div class="quiz_validation">
-    <button (click)="goToResultPage()" class="btn">Show score</button>
+<div class="container mx-auto p-6">
+  <div
+    *ngIf="currentCategory"
+    class="mb-6 text-center bg-blue-500 text-white p-4 rounded-lg"
+  >
+    <h1 class="text-3xl font-bold">Quiz : {{ currentCategory.name }}</h1>
+    <p class="text-lg">{{ currentCategory.description }}</p>
   </div>
-</section>
+
+  <div *ngIf="isLoading" class="text-center">
+    <p class="text-xl">Chargement des questions...</p>
+  </div>
+
+  <!-- Liste des questions avec composant enfant -->
+  <div *ngIf="!isLoading && questions.length > 0">
+    <app-question
+      *ngFor="let question of questions; let i = index"
+      [question]="question"
+      [questionIndex]="i"
+    ></app-question>
+
+    <div class="text-center mt-8">
+      <button
+        (click)="goToResultPage()"
+        class="bg-green-500 text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-green-600"
+      >
+        Terminer le Quiz
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="!isLoading && questions.length === 0" class="text-center">
+    <p class="text-xl text-gray-500">
+      Aucune question disponible pour cette catégorie.
+    </p>
+  </div>
+</div>

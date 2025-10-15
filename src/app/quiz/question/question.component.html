@@ -1,8 +1,17 @@
-<section class="question_container" *ngFor="let content of quizContent; let i = index">
-  <h4 class="question_label"><b>Question {{ i + 1 }} :</b> {{ content?.question }}</h4>
-  <app-answer
-    [answers]="content?.answers"
-    [questionId]="content?.id"
-    (answerSelected)="addAnswer($event, content.id)"
-  ></app-answer>
-</section>
+<div class="mb-6 p-4 bg-white rounded-lg shadow">
+  <h3 class="text-xl font-semibold mb-4">
+    {{ questionIndex + 1 }}. {{ question.questionLabel }}
+  </h3>
+
+  <div *ngIf="isLoading" class="text-center text-gray-500">
+    Chargement des réponses...
+  </div>
+
+  <div *ngIf="!isLoading" class="space-y-3">
+    <app-answer
+      *ngFor="let answer of answers"
+      [answer]="answer"
+      [questionId]="question.id"
+    ></app-answer>
+  </div>
+</div>

@@ -1,61 +1,78 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import { Observable } from 'rxjs';
+
+export interface PlayerAnswer {
+  questionId: number;
+  answerId: number;
+  isCorrect?: boolean;
+}
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class QuizService {
-  quizContent: any[] = [];
-  playerAnswers: {questionId: number; answer: string}[] = [];
-  score = 0;
-  isQuizFinished = false;
-  playerName: string = '';
+  private apiUrl = 'http://localhost:3000';
 
-  constructor(private http: HttpClient) { }
+  playerAnswers: PlayerAnswer[] = [];
+  playerName: string = 'Joueur';
+  score: number = 0;
 
-  checkAnswers() {
+  constructor(private http: HttpClient) {}
+
+  getQuestions(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/questions`);
+  }
+
+  getQuestionsByCategoryId(categoryId: number): Observable<any[]> {
+    return this.http.get<any[]>(
+      `${this.apiUrl}/questions?categoryId=${categoryId}`
+    );
+  }
+
+  getAnswersByQuestionId(questionId: number): Observable<any[]> {
+    return this.http.get<any[]>(
+      `${this.apiUrl}/answers?questionId=${questionId}`
+    );
+  }
+
+  addAnswer(questionId: number, answerId: number): void {
+    const existingIndex = this.playerAnswers.findIndex(
+      (a) => a.questionId === questionId
+    );
+
+    if (existingIndex !== -1) {
+      this.playerAnswers[existingIndex].answerId = answerId;
+    } else {
+      this.playerAnswers.push({ questionId, answerId });
+    }
+  }
+
+  calculateScore(questions: any[], allAnswers: any[]): number {
     this.score = 0;
-    for (let i = 0; i < this.playerAnswers.length; i++) {
-      const question = this.quizContent.find((q) => q.id === this.playerAnswers[i].questionId);
-      if (!question) continue;
-      for (let j = 0; j < question.answers.length; j++) {
-        const currentAnswer = question.answers[j];
-        if (currentAnswer?.isCorrect && this.playerAnswers[i].answer === currentAnswer.answerLabel) {
-          this.score += 1;
-          break;
-        }
-      }
-    }
-    this.isQuizFinished = true;
-  }
 
-  addAnswer(answer: string, questionId: number) {
-    const isAnswered = this.playerAnswers.find((a) => a.questionId === questionId);
-    if (isAnswered) {
-      isAnswered.answer = answer;
-      return;
-    }
-    this.playerAnswers.push({questionId, answer});
-  }
+    this.playerAnswers.forEach((playerAnswer) => {
+      const correctAnswer = allAnswers.find(
+        (a) => a.questionId === playerAnswer.questionId && a.isCorrect === true
+      );
 
-  getQuizContent() {
-    this.http.get('http://localhost:3000/questions').subscribe((questions: any) => {
-      for (const question of questions) {
-        this.http.get(`http://localhost:3000/answers?questionId=${question.id}`).subscribe((answers: any) => {
-          this.quizContent.push({
-              id: question.id,
-              question: question.questionLabel,
-              answers
-          });
-        });
+      if (correctAnswer && correctAnswer.id === playerAnswer.answerId) {
+        this.score++;
+        playerAnswer.isCorrect = true;
+      } else {
+        playerAnswer.isCorrect = false;
       }
     });
+
+    return this.score;
   }
 
-  resetQuiz() {
-    this.quizContent = [];
+  resetQuiz(): void {
     this.playerAnswers = [];
     this.score = 0;
-    this.isQuizFinished = false;
+  }
+
+  getScore(): number {
+    return this.score;
   }
 }

@@ -1,11 +1,14 @@
-<ul class="answer_container">
-  <li *ngFor="let answer of answers; let j = index">
-    <button
-      [disabled]="isQuizFinished"
-      (click)="addAnswer(answer?.answerLabel)"
-      [class.answer_container--selected]="isAnswerSelected(answer?.answerLabel, questionId)"
-    >
-      <span>{{ getAnswerLetter(j) }}.</span> {{ answer?.answerLabel }}
-    </button>
-  </li>
-</ul>
+<div
+  class="p-3 border rounded-lg hover:bg-blue-50 cursor-pointer"
+  (click)="selectAnswer(answer.id)"
+>
+  <label class="cursor-pointer flex items-center">
+    <input
+      type="radio"
+      [name]="'question-' + questionId"
+      [value]="answer.id"
+      class="mr-3"
+    />
+    <span>{{ answer.answerLabel }}</span>
+  </label>
+</div>
