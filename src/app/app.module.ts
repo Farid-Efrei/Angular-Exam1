@@ -34,7 +34,7 @@ import { DialogComponent } from './shared/components/dialog/dialog.component';
     AddPrefixDirective,
     HighlightDirective,
     DateToSecondsPipe,
-    DialogComponent
+    DialogComponent,
   ],
   imports: [
     BrowserModule,
