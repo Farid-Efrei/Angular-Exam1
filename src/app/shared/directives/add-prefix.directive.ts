@@ -5,7 +5,7 @@ import { Directive, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
   standalone: false
 })
 export class AddPrefixDirective implements OnInit {
-  @Input() prefixIndex: number = 0;
+  @Input() prefixIndex = 0;
 
   constructor(private el: ElementRef, private renderer: Renderer2) { }
 

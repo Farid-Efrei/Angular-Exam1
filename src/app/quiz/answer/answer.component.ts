@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { QuizService } from "../../shared/services/quiz.service";
+import { Answer } from 'src/app/shared/models/answer';
 
 @Component({
   selector: 'app-answer',
@@ -8,7 +9,7 @@ import { QuizService } from "../../shared/services/quiz.service";
   standalone: false
 })
 export class AnswerComponent {
-  @Input() answers: any[] = [];
+  @Input() answers: Answer[] = [];
   @Input() questionId: number = 0;
   @Output() answerSelected = new EventEmitter<boolean>();
   isQuizFinished = this.quizService.isQuizFinished;

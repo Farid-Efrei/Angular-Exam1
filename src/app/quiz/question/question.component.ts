@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { QuizService } from "../../shared/services/quiz.service";
+import { Quiz } from 'src/app/shared/models/quiz';
 
 @Component({
   selector: 'app-question',
@@ -8,7 +9,7 @@ import { QuizService } from "../../shared/services/quiz.service";
   standalone: false
 })
 export class QuestionComponent implements OnInit {
-  quizContent: any[] = this.quizService.quizContent;
+  quizContent: Quiz[] = this.quizService.quizContent;
   answeredDate: Map<number, Date> = new Map();
   currentDate = new Date();
 

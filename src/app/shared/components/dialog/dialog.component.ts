@@ -7,7 +7,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   standalone: false
 })
 export class DialogComponent {
-  @Input() title: string = '';
+  @Input() title = '';
   @Output() hasConfirmed = new EventEmitter<boolean>();
 
   closeDialog(hasConfirmed = false) {

@@ -2,8 +2,8 @@
   <li *ngFor="let answer of answers; let j = index">
     <button
       [disabled]="isQuizFinished"
-      (click)="addAnswer(answer?.answerLabel, questionId)"
-      [class.answer_container--selected]="isAnswerSelected(answer?.answerLabel, questionId)"
+      (click)="addAnswer(answer.answerLabel, questionId)"
+      [class.answer_container--selected]="isAnswerSelected(answer.answerLabel, questionId)"
       appAddPrefix
       [prefixIndex]="j"
     >

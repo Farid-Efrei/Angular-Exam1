@@ -1,15 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
+import { Question } from '../models/question';
+import { Answer } from '../models/answer';
+import { Quiz } from '../models/quiz';
+import { PlayerAnswer } from '../models/player-answer';
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuizService {
-  quizContent: any[] = [];
-  playerAnswers: {questionId: number; answer: string}[] = [];
+  quizContent: Quiz[] = [];
+  playerAnswers: PlayerAnswer[] = [];
   score = 0;
   isQuizFinished = false;
-  playerName: string = '';
+  playerName = '';
 
   constructor(private http: HttpClient) { }
 
@@ -39,9 +43,9 @@ export class QuizService {
   }
 
   getQuizContent() {
-    this.http.get('http://localhost:3000/questions').subscribe((questions: any) => {
+    this.http.get<Question[]>('http://localhost:3000/questions').subscribe((questions) => {
       for (const question of questions) {
-        this.http.get(`http://localhost:3000/answers?questionId=${question.id}`).subscribe((answers: any) => {
+        this.http.get<Answer[]>(`http://localhost:3000/answers?questionId=${question.id}`).subscribe((answers) => {
           this.quizContent.push({
               id: question.id,
               question: question.questionLabel,
