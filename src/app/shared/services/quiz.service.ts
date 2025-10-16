@@ -4,6 +4,7 @@ import { Question } from '../models/question';
 import { Answer } from '../models/answer';
 import { Quiz } from '../models/quiz';
 import { PlayerAnswer } from '../models/player-answer';
+import { filter, first, map, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,11 @@ export class QuizService {
   score = 0;
   isQuizFinished = false;
   playerName = '';
+  myObservable = of(1,2,3).pipe(
+    map(num => num + 1),
+    filter(num => num % 2 === 0),
+    first()
+  );
 
   constructor(private http: HttpClient) { }
 

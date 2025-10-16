@@ -11,4 +11,13 @@
     </button>
   </form>
   <button class="home_quiz-btn btn--outline" (click)="navigateToQuiz()" [disabled]="isPlayerNameFill">Démarrer</button>
+  <div class="my-4 flex flex-col items-center justify-center">
+    <input type="text" id="search" name="search" placeholder="Rechercher un article" [(ngModel)]="searchArticle" class="border-2 border-violet-500 px-4 py-2 rounded mr-2" (input)="filterArticles($event)">
+    <div class="grid grid-cols-3 gap-4 mt-4">
+      <div class="bg-violet-500 p-4 rounded-md shadow-md" *ngFor="let article of filteredArticles">
+        <h3 class="text-white text-lg font-bold">{{ article.title }}</h3>
+        <p class="text-white text-sm mt-2">{{ article.content }}</p>
+      </div>
+    </div>
+  </div>
 </section>

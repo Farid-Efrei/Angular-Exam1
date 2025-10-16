@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from "../auth/auth.service";
+import { QuizService } from '../shared/services/quiz.service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +8,13 @@ import { AuthService } from "../auth/auth.service";
   styleUrls: ['./header.component.scss'],
   standalone: false
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private quizSvc: QuizService) { }
+
+  ngOnInit(): void {
+    this.quizSvc.myObservable.subscribe(num => console.log(num));
+  }
 
   logout() {
     this.authService.logout();
